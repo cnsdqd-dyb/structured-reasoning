@@ -5,7 +5,9 @@ Yubo Dong, Hehe Fan, Linchao Zhu, and Yi Yang · ICLR 2026
 
 [Paper](https://proceedings.iclr.cc/paper_files/paper/2026/hash/ad5b3f324b24c17cdc2f3712298c76bd-Abstract-Conference.html) · [Project page](https://cnsdqd-dyb.github.io/structured-reasoning/) · [Dataset on Hugging Face](https://huggingface.co/datasets/FreeFrank/Structured-Reasoning)
 
-This repository hosts the project website. The framework organizes reasoning into cognitive steps to study reasoning efficiency and explainability.
+This repository hosts the project website linked from the ICLR 2026 paper. The [main project repository linked from the original arXiv paper](https://github.com/cnsdqd-dyb/Enhancing-Large-Language-Models-through-Structured-Reasoning) contains the dataset release documentation.
+
+The framework organizes reasoning into cognitive steps to study reasoning efficiency and explainability.
 
 ## Dataset
 
