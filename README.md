@@ -1,58 +1,25 @@
-# Structured Reasoning
+# Structured Reasoning project website
 
-**Structured Reasoning for LLMs: A Unified Framework for Efficiency and Explainability**  
-Yubo Dong, Hehe Fan, Linchao Zhu, and Yi Yang · ICLR 2026
+Source for the project homepage of **Structured Reasoning for LLMs: A Unified Framework for Efficiency and Explainability** (ICLR 2026).
 
-[Paper](https://proceedings.iclr.cc/paper_files/paper/2026/hash/ad5b3f324b24c17cdc2f3712298c76bd-Abstract-Conference.html) · [Project page](https://cnsdqd-dyb.github.io/structured-reasoning/) · [Dataset on Hugging Face](https://huggingface.co/datasets/FreeFrank/Structured-Reasoning)
+[Live homepage](https://cnsdqd-dyb.github.io/structured-reasoning/) · [Main project repository](https://github.com/cnsdqd-dyb/Enhancing-Large-Language-Models-through-Structured-Reasoning) · [Public dataset](https://huggingface.co/datasets/FreeFrank/Structured-Reasoning)
 
-This repository hosts the project website linked from the ICLR 2026 paper. The [main project repository linked from the original arXiv paper](https://github.com/cnsdqd-dyb/Enhancing-Large-Language-Models-through-Structured-Reasoning) contains the dataset release documentation.
+## Website content
 
-The framework organizes reasoning into cognitive steps to study reasoning efficiency and explainability.
+- `index.html`: research overview, official paper and PDF links, public dataset, loading example, open-source plan, and citation.
+- `analyzer.html`: the existing interactive step-dependency research demonstration.
+- `static/`: existing figures, styles, scripts, and demo data.
 
-## Dataset
+The dataset has 516 examples, 23 cognitive step types, and one training split, distributed under MIT. The conference paper and research demo are available. Training implementations, reproducibility scripts/configurations, and model checkpoints are planned; dates and licenses for those releases will be announced separately. See the main repository's [ROADMAP.md](https://github.com/cnsdqd-dyb/Enhancing-Large-Language-Models-through-Structured-Reasoning/blob/main/ROADMAP.md).
 
-[**FreeFrank/Structured-Reasoning**](https://huggingface.co/datasets/FreeFrank/Structured-Reasoning) is publicly available under the **MIT** license. It contains **516 examples** in one `train` split, with reasoning segmented using **23 cognitive step types**. Parquet and JSONL versions are provided.
+## Local preview
 
-```python
-from datasets import load_dataset
+From the repository root:
 
-dataset = load_dataset("FreeFrank/Structured-Reasoning", split="train")
-example = dataset[0]
-print(example["problem"])
-print(example["reasoning"])
-print(example["answer"])
+```bash
+python -m http.server 8000
 ```
 
-| Field | Description |
-|---|---|
-| `problem_id` | Stable example identifier |
-| `problem` | Problem statement |
-| `reasoning` | Reasoning with paired cognitive step tags |
-| `answer` | Answer target |
-| `content` | Final response |
-| `steps` | Ordered steps with `step_id`, `type`, and `text` |
+Open `http://localhost:8000/`. Serve the files over HTTP so the demo can fetch its assets and example data. The homepage is a static page; the analysis demo loads browser-based dependencies separately.
 
-For supervised training, use `problem` as the user prompt and construct the assistant target as follows:
-
-```python
-assistant_target = (
-    "<think>\n" + example["reasoning"]
-    + "\n</think>\n" + example["content"]
-)
-```
-
-Ensure your chat template retains the reasoning and your context length accommodates the full target. With the checked DeepSeek-R1-Distill-Qwen-7B tokenizer, the longest serialized example has 26,698 tokens; a 32,768-token context accommodates all examples. Recheck lengths with your own tokenizer and template.
-
-The release includes editorial curation and step annotations. It is not asserted to be the exact dataset used for the paper's reported experiments, and no independent corpus-wide correctness estimate is reported. Question provenance, source attribution, license terms, and further usage details are available in the [dataset card](https://huggingface.co/datasets/FreeFrank/Structured-Reasoning). Step annotations describe reasoning spans; they do not provide attention weights or dependency graph edges.
-
-## Citation
-
-```bibtex
-@inproceedings{dong2026structuredreasoning,
-  title = {Structured Reasoning for LLMs: A Unified Framework for Efficiency and Explainability},
-  author = {Dong, Yubo and Fan, Hehe and Zhu, Linchao and Yang, Yi},
-  booktitle = {International Conference on Learning Representations},
-  year = {2026},
-  url = {https://proceedings.iclr.cc/paper_files/paper/2026/hash/ad5b3f324b24c17cdc2f3712298c76bd-Abstract-Conference.html}
-}
-```
+GitHub Pages serves the existing project URL. The website repository and main project repository have distinct purposes: website source lives here, while dataset release documentation and the implementation roadmap live in the main repository linked by the original arXiv paper.
